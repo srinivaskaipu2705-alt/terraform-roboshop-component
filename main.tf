@@ -148,7 +148,7 @@ resource "terraform_data" "main" {
     target_group_arns = [aws_lb_target_group.main.arn]
 
     instance_refresh {
-      strategy = "rolling"
+      strategy = "Rolling"
       preferences {
         min_healthy_percentage = 50 #atleast 50% of the instances should be up and running
       }
