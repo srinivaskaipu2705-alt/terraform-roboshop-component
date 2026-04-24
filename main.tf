@@ -35,7 +35,6 @@ resource "terraform_data" "main" {
 
     provisioner "remote-exec" {
       inline = [ 
-        "set -x",
         "chmod +x /tmp/bootstrap.sh",
         "sudo sh /tmp/bootstrap.sh ${var.component} ${var.environment}"
        ]
@@ -70,6 +69,8 @@ resource "terraform_data" "main" {
     port = local.tg_port  # if frontend port is 80, otherwise it is 8080
     protocol = "HTTP"
     vpc_id = local.vpc_id
+    deregistration_delay = 60 # waiting period before deleting the instance
+    
     health_check {
         healthy_threshold = 2
         unhealthy_threshold = 2 
